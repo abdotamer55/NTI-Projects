@@ -151,7 +151,7 @@ The notebook contains multiple visualizations illustrating:
 
 ## 👨‍💻 Author
 
-**Abdelrhman Tamer**
+### Abdelrhman Tamer
 
 AI Engineer & Data Analyst
 
