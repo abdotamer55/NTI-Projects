@@ -1,162 +1,253 @@
-# 🏥 Insurance Charges Prediction using Machine Learning
+# 🚢 Titanic Survival Analysis
 
 <p align="center">
 
-![Python](https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge\&logo=python)
+![Python](https://img.shields.io/badge/Python-Data%20Analysis-blue?style=for-the-badge\&logo=python)
+
 ![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-black?style=for-the-badge\&logo=pandas)
-![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Machine%20Learning-orange?style=for-the-badge\&logo=scikitlearn)
-![Streamlit](https://img.shields.io/badge/Streamlit-Web%20Application-red?style=for-the-badge\&logo=streamlit)
+
+![NumPy](https://img.shields.io/badge/NumPy-Numerical%20Computing-blue?style=for-the-badge\&logo=numpy)
+
+![Matplotlib](https://img.shields.io/badge/Matplotlib-Data%20Visualization-orange?style=for-the-badge)
+
+![Seaborn](https://img.shields.io/badge/Seaborn-Statistical%20Visualization-blue?style=for-the-badge)
+
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Data%20Preprocessing-orange?style=for-the-badge\&logo=scikitlearn)
 
 </p>
 
 ---
 
-# 📌 Project Overview
+## 📌 Project Overview
 
-Medical insurance costs vary significantly depending on several personal and lifestyle factors. Predicting these charges accurately can help insurance providers, healthcare organizations, and individuals better estimate future medical expenses.
+The sinking of the RMS Titanic is one of the most well-known maritime disasters in history. This project performs a complete **Exploratory Data Analysis (EDA)** on the Titanic passenger dataset to identify the demographic, social, and economic factors associated with passenger survival.
 
-This project develops a complete **Machine Learning Regression Pipeline** that predicts a person's **medical insurance charges** using demographic and health-related information.
+The project follows a complete data analysis workflow, starting with data understanding and quality assessment, followed by data cleaning, feature engineering, exploratory analysis, visualization, and data preparation for future machine learning models.
 
-The project includes:
+The analysis focuses on answering important questions such as:
 
-* Data Exploration (EDA)
-* Data Cleaning
-* Feature Engineering
-* Data Visualization
-* Feature Scaling
-* Model Training
-* Model Evaluation
-* Interactive Prediction Web App using Streamlit
-
----
-
-# 🎯 Project Objective
-
-The objective of this project is to build an accurate regression model capable of estimating medical insurance charges based on user information such as:
-
-* Age
-* BMI
-* Number of Children
-* Smoking Status
-* Gender
-* Residential Region
-
-The final model is deployed through an interactive **Streamlit Web Application** where users can enter their information and instantly receive a predicted insurance cost.
+* Did gender influence survival?
+* Did passenger class affect survival chances?
+* Were children more likely to survive?
+* Did ticket fare influence survival?
+* How did family size affect survival?
+* Did social titles provide additional information about survival?
+* Did cabin availability have a relationship with survival?
 
 ---
 
-# 📂 Dataset
+## 🎯 Project Objectives
 
-The dataset contains demographic and health-related information for insurance customers.
+The main objectives of this project are to:
 
-### Target Variable
-
-* **Charges** (Medical Insurance Cost)
-
-### Input Features
-
-* Age
-* Sex
-* BMI
-* Children
-* Smoker
-* Region
+* Understand the structure and quality of the Titanic dataset.
+* Identify and handle missing values.
+* Detect duplicate records and logical data anomalies.
+* Analyze relationships between passenger characteristics and survival.
+* Create meaningful features from the original data.
+* Visualize important patterns and trends.
+* Identify the strongest factors associated with passenger survival.
+* Prepare the dataset for future machine learning classification models.
 
 ---
 
-# ⚙️ Feature Engineering
+## 📂 Dataset
 
-Several additional features were created to improve model performance, including:
+The dataset contains information about Titanic passengers, including demographic details, travel information, family relationships, and survival status.
 
-### Encoded Features
+### 🎯 Target Variable
 
-* Sex Encoding
-* Smoker Encoding
+* **Survived**
 
-### Interaction Features
+  * `0` → Passenger did not survive.
+  * `1` → Passenger survived.
 
-* Smoker × BMI
-* Smoker × Age
+### 📥 Original Features
 
-### Health Indicators
-
-* Obesity Indicator
-
-### Age Categories
-
-* 19–30
-* 31–45
-* 46–60
-* 60+
-
-### BMI Categories
-
-* Normal
-* Overweight
-* Obese
-
-These engineered features enabled the model to capture more complex relationships within the dataset.
+* `PassengerId` — Unique passenger identifier.
+* `Pclass` — Passenger ticket class.
+* `Name` — Passenger name.
+* `Sex` — Passenger gender.
+* `Age` — Passenger age.
+* `SibSp` — Number of siblings or spouses aboard.
+* `Parch` — Number of parents or children aboard.
+* `Ticket` — Ticket number.
+* `Fare` — Ticket fare.
+* `Cabin` — Cabin number.
+* `Embarked` — Port of embarkation.
 
 ---
 
-# 🤖 Machine Learning Workflow
+## 🧹 Data Cleaning and Preprocessing
 
-The complete workflow consists of:
+The following data preparation steps were performed:
 
-1. Data Loading
-2. Exploratory Data Analysis (EDA)
-3. Data Cleaning
-4. Feature Engineering
-5. Feature Scaling using StandardScaler
-6. Train/Test Split
-7. Linear Regression Model Training
-8. Model Evaluation
-9. Model Saving
-10. Streamlit Deployment
-
----
-
-# 📊 Model Performance
-
-The trained Linear Regression model achieved the following results:
-
-| Metric   | Train       | Test        |
-| -------- | ----------- | ----------- |
-| R² Score | **0.835**   | **0.886**   |
-| MAE      | **2829.68** | **2845.16** |
-| RMSE     | **4749.45** | **4584.57** |
-
-The model demonstrates strong generalization performance with no significant signs of overfitting.
+* Removed duplicate records.
+* Checked for duplicate passenger IDs.
+* Identified missing values.
+* Filled missing `Age` values using the median.
+* Filled missing `Embarked` values using the most frequent value.
+* Created a cabin availability indicator before removing the sparse `Cabin` column.
+* Handled missing `Fare` values using the median.
+* Removed unnecessary columns.
+* Removed extra spaces from text values.
+* Standardized gender values.
+* Converted embarkation codes into readable port names.
+* Checked for invalid ages and logical anomalies.
+* Checked for negative family counts and invalid fare values.
+* Investigated zero-fare passenger records.
+* Detected and analyzed outliers using the **IQR method**.
 
 ---
 
-# 🌐 Streamlit Application
+## ⚙️ Feature Engineering
 
-The application is organized into multiple pages:
+Several new features were created to improve the analysis and provide more meaningful insights.
 
-🏠 **Home**
+### 👨‍👩‍👧 Family Features
 
-Project overview and documentation.
+* **FamilySize**
 
-📊 **EDA**
+```text
+FamilySize = SibSp + Parch + 1
+```
 
-Explore the dataset, statistics, missing values, and sample records.
+Represents the total number of family members traveling together, including the passenger.
 
-⚙️ **Feature Engineering**
+* **IsAlone**
 
-Understand how new features were generated from the original dataset.
+Indicates whether a passenger was traveling alone.
 
-📈 **Visualization**
+### 👤 Passenger Title
 
-Interactive charts showing distributions, correlations, and feature relationships.
+Passenger titles were extracted from the `Name` column, such as:
 
-🤖 **Prediction**
+* Mr
+* Mrs
+* Miss
+* Master
+* Rare Titles
 
-Enter user information and receive an estimated medical insurance charge instantly.
+The `Title` feature provides useful information related to age, gender, and social status.
+
+### 🎂 Age Groups
+
+Passengers were grouped into age categories to better analyze age-related survival patterns.
+
+Examples include:
+
+* Child
+* Young Adult
+* Adult
+* Senior
+
+### 💰 Fare per Person
+
+```text
+Fare_per_Person = Fare / FamilySize
+```
+
+This feature provides a more meaningful estimate of the travel cost associated with each passenger.
+
+### 🛏️ Cabin Availability
+
+* **Has_Cabin**
+
+  * `1` → Cabin information is available.
+  * `0` → Cabin information is missing.
+
+This feature helps preserve useful information from the original `Cabin` column without using the sparse raw values.
 
 ---
 
-# 🛠️ Technologies Used
+## 📊 Exploratory Data Analysis
+
+The project includes several visualizations to explore the relationship between passenger characteristics and survival.
+
+### Visualizations Included
+
+* Overall Survival Distribution
+* Survival Rate by Gender
+* Survival Rate by Passenger Class
+* Correlation Heatmap
+* Age Distribution by Survival Status
+* Fare Distribution by Survival Status
+* Family Size vs Survival
+* Traveling Alone vs Survival
+* Passenger Title vs Survival
+
+---
+
+## 🔍 Key Insights
+
+### 1. Gender Was the Strongest Survival Factor
+
+Female passengers had a significantly higher survival rate than male passengers.
+
+This pattern is consistent with the historical **“women and children first”** evacuation policy.
+
+### 2. Passenger Class Had a Major Impact
+
+Survival rates decreased from First Class to Third Class.
+
+Passengers in First Class generally had better access to lifeboats and more favorable evacuation conditions.
+
+### 3. Children Had a Survival Advantage
+
+Survivors were generally younger, and young children had better survival chances than many adult passengers.
+
+Age alone was not the strongest predictor, but it became more useful when combined with age groups and passenger titles.
+
+### 4. Higher Fares Were Associated with Higher Survival
+
+Passengers who paid higher fares generally had higher survival rates.
+
+Fare acted as an indicator of passenger class, wealth, and cabin location.
+
+### 5. Family Size Had a Non-Linear Effect
+
+Passengers traveling in small families generally had better survival rates.
+
+Passengers traveling alone and those traveling in very large families had lower survival rates.
+
+### 6. Passenger Titles Added Valuable Information
+
+Titles such as **Mrs** and **Miss** showed higher survival rates.
+
+The **Master** title, commonly associated with young boys, had a better survival rate than **Mr**.
+
+The **Mr** title had the lowest survival rate among the main passenger title groups.
+
+### 7. Cabin Availability Was Informative
+
+Passengers with recorded cabin information generally had better survival outcomes.
+
+The `Has_Cabin` feature provided useful information while avoiding the high number of missing values in the original `Cabin` column.
+
+---
+
+## 📈 Executive Summary
+
+The analysis indicates that **Gender** and **Passenger Class** were the strongest factors associated with survival.
+
+The highest-risk passenger profile was generally:
+
+> An adult male traveling in Third Class, traveling alone or with a very large family, paying a low fare, and having no recorded cabin information.
+
+The most valuable engineered features were:
+
+* `Title`
+* `FamilySize`
+* `IsAlone`
+* `AgeGroup`
+* `Fare_per_Person`
+* `Has_Cabin`
+
+These features can be used as important inputs for a future machine learning classification model.
+
+---
+
+## 🛠️ Technologies Used
 
 * Python
 * Pandas
@@ -164,26 +255,85 @@ Enter user information and receive an estimated medical insurance charge instant
 * Matplotlib
 * Seaborn
 * Scikit-Learn
-* Joblib
-* Streamlit
+* Jupyter Notebook
 
 ---
 
-# 🚀 Future Improvements
+## 📁 Project Structure
 
-* Compare multiple regression algorithms.
-* Hyperparameter tuning.
-* Cross-validation.
-* Feature importance analysis.
-* Cloud deployment.
-* API integration.
+```text
+Titanic-Project/
+│
+├── data/
+│   └── titanic-1.csv
+│
+├── notebook/
+│   └── Titanic_Analysis_Updated.ipynb
+│
+└── README.md
 
 ---
 
-# 👨‍💻 Author
+## ▶️ Getting Started
 
-**Abdelrhman Tamer**
+### 1. Clone the Repository
 
-Machine Learning & Data Science Enthusiast
+```bash
+git clone https://github.com/your-username/Titanic-Survival-Analysis.git
+```
 
-Developed as an end-to-end Machine Learning Regression project using Python and Streamlit.
+### 2. Open the Project Folder
+
+```bash
+cd Titanic-Survival-Analysis
+```
+
+### 3. Install the Required Libraries
+
+```bash
+pip install pandas numpy matplotlib seaborn scikit-learn jupyter
+```
+
+### 4. Launch Jupyter Notebook
+
+```bash
+jupyter notebook
+```
+
+### 5. Open the Notebook
+
+```text
+Titanic_Analysis_Updated.ipynb
+```
+
+---
+
+## 🚀 Future Improvements
+
+* Build machine learning models to predict passenger survival.
+* Compare multiple classification algorithms.
+* Apply cross-validation.
+* Perform hyperparameter tuning.
+* Analyze feature importance.
+* Evaluate models using accuracy, precision, recall, F1-score, and ROC-AUC.
+* Deploy the final model using Streamlit.
+* Add an interactive dashboard for exploring survival patterns.
+
+---
+
+## 👨‍💻 Author
+
+### Abdelrhman Tamer
+
+AI Engineer & Data Analyst
+
+Passionate about:
+
+* Artificial Intelligence
+* Machine Learning
+* Data Analysis
+* Python Development
+
+---
+
+## ⭐ If you found this project useful, consider giving it a Star on GitHub!
